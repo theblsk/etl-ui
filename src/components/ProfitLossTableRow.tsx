@@ -119,9 +119,21 @@ export const ProfitLossTableRow: React.FC<ProfitLossTableRowProps> = ({ report }
             sx={{ fontWeight: 500 }}
           />
         </TableCell>
+        <TableCell align="right">
+          <Chip
+            label={open ? 'Collapse' : 'Expand'}
+            size="small"
+            variant="outlined"
+            sx={{ fontWeight: 500, cursor: 'pointer' }}
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpen(!open);
+            }}
+          />
+        </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 2 }}>
               {isLoading && (

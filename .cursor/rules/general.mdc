@@ -1,0 +1,7 @@
+---
+alwaysApply: true
+---
+this is a React project made using Vite and is using Bun not npm
+the project is a demo test, while we need a sample folder structure, we don't need to overcomplicate components and navigation
+the project gets its info from prd.md in docs folder
+the project gets the backend info from backend.md in docs folder.

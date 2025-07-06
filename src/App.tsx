@@ -5,8 +5,10 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline, Container, Typography, Box, Paper, Tabs, Tab } from '@mui/material';
 import TableViewIcon from '@mui/icons-material/TableView';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { ProfitLossPage } from './pages/ProfitLossPage';
 import { DashboardPage } from './pages/DashboardPage';
+import { DataIntegrationPage } from './pages/DataIntegrationPage';
 
 // Kudwa-inspired theme
 const theme = createTheme({
@@ -151,11 +153,30 @@ function AppContent() {
   const navigate = useNavigate();
 
   const getTabValue = () => {
-    return location.pathname === '/dashboard' ? 1 : 0;
+    switch (location.pathname) {
+      case '/dashboard':
+        return 1;
+      case '/integration':
+        return 2;
+      default:
+        return 0;
+    }
   };
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
-    navigate(newValue === 0 ? '/reports' : '/dashboard');
+    switch (newValue) {
+      case 0:
+        navigate('/reports');
+        break;
+      case 1:
+        navigate('/dashboard');
+        break;
+      case 2:
+        navigate('/integration');
+        break;
+      default:
+        navigate('/reports');
+    }
   };
 
   return (
@@ -191,6 +212,12 @@ function AppContent() {
               iconPosition="start"
               sx={{ minHeight: 64 }}
             />
+            <Tab 
+              icon={<CloudUploadIcon />} 
+              label="Data Integration" 
+              iconPosition="start"
+              sx={{ minHeight: 64 }}
+            />
           </Tabs>
         </Paper>
 
@@ -199,6 +226,7 @@ function AppContent() {
           <Route path="/" element={<ProfitLossPage />} />
           <Route path="/reports" element={<ProfitLossPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/integration" element={<DataIntegrationPage />} />
         </Routes>
 
         {/* Footer Section */}

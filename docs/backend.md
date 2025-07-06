@@ -76,6 +76,8 @@ src/
    bun run dev
    ```
 
+> **Note:** The ETL process is no longer run automatically on app start. To load data, use the ETL API endpoint described below.
+
 ## API Endpoints
 
 ### Companies
@@ -114,6 +116,41 @@ src/
 - `DELETE /api/line-items/:id` - Delete line item
 - `GET /api/line-items/report/:reportId` - Get line items by report
 - `GET /api/line-items/account/:accountId` - Get line items by account
+
+### ETL
+- `POST /api/etl` - Upload a large JSON payload to run the ETL process and seed the database.
+
+#### Usage
+Send a POST request to `/api/etl` with a JSON body (up to 100MB) in the following format:
+
+```json
+{
+  "data": [
+    {
+      "rootfi_company_id": 123,
+      "platform_id": "2022-06-01_2022-06-30",
+      "period_start": "2022-06-01",
+      "period_end": "2022-06-30",
+      "gross_profit": 0,
+      "net_profit": 0,
+      "revenue": [
+        {
+          "name": "Operating Revenue",
+          "value": 0,
+          "line_items": [
+            { "name": "Sales", "value": 0, "account_id": "..." }
+          ]
+        }
+      ],
+      // ... other sections ...
+    }
+  ]
+}
+```
+
+- The endpoint expects a top-level `data` array containing report objects.
+- The server will process and insert companies, accounts, reports, and line items as needed.
+- Returns a success or error message in the standard response format.
 
 ## Scripts
 

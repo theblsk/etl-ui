@@ -7,3 +7,9 @@
 - **Screen 2 (Optional): Dashboard Visualization**
     - Optionally, build a simple dashboard highlighting key insights from the data. This step is entirely optional and considered a bonus.
 Look for backend endpoints in backend.md    
+
+
+### ⚙️ Frontend Controls
+
+- Provide a clear button for users to trigger or refresh backend data integration.
+- Provide simple feedback to indicate integration progress.
